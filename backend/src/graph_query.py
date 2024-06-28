@@ -47,11 +47,11 @@ QUERY_WITHOUT_DOCUMENT = """
 
 def get_graphDB_driver(uri, username, password):
     """
-    Creates and returns a Neo4j database driver instance configured with the provided credentials.
+    Neo4j 데이터베이스 드라이버 인스턴스 생성
+    제공된 자격 증명으로 구성된 Neo4j 데이터베이스 드라이버 인스턴스를 생성하여 반환합니다.
 
     Returns:
-    Neo4j.Driver: A driver object for interacting with the Neo4j database.
-
+        Neo4j.Driver: Neo4j 데이터베이스와 상호 작용하기 위한 드라이버 객체입니다.    
     """
     try:
         logging.info(f"Attempting to connect to the Neo4j database at {uri}")

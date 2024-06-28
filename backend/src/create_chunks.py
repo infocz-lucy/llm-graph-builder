@@ -15,13 +15,13 @@ class CreateChunksofDocument:
 
     def split_file_into_chunks(self):
         """
-        Split a list of documents(file pages) into chunks of fixed size.
+        문서 목록을 고정된 크기의 청크로 분할
 
         Args:
-            pages: A list of pages to split. Each page is a list of text strings.
+            pages: 분할할 페이지 목록입니다. 각 페이지는 텍스트 문자열의 목록입니다.
 
         Returns:
-            A list of chunks each of which is a langchain Document.
+            각각 langchain Document인 청크의 목록입니다.         
         """
         logging.info("Split file into smaller chunks")
         # number_of_chunks_allowed = int(os.environ.get('NUMBER_OF_CHUNKS_ALLOWED'))

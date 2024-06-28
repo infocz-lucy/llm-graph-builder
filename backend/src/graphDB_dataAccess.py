@@ -120,13 +120,14 @@ class graphDBdataAccess:
         result = self.graph.query(query)
         list_of_json_objects = [entry['d'] for entry in result]
         return list_of_json_objects
-        
+    
+    # 데이터 업데이트
     def update_KNN_graph(self):
         """
         Update the graph node with SIMILAR relationship where embedding scrore match
         """
         index = self.graph.query("""show indexes yield * where type = 'VECTOR' and name = 'vector'""")
-        # logging.info(f'show index vector: {index}')
+        logging.info(f'show index vector: {index}')
         knn_min_score = os.environ.get('KNN_MIN_SCORE')
         if len(index) > 0:
             logging.info('update KNN graph')

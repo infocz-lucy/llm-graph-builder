@@ -64,7 +64,8 @@ app.add_api_route("/health", health([healthy_condition, healthy]))
 
 app.add_middleware(SessionMiddleware, secret_key=os.urandom(24))
 
-
+# Link를 통한 데이터 삽입 
+# 예 : youtube, wikipedia, S3, gcs
 @app.post("/url/scan")
 async def create_source_knowledge_graph_url(
     request: Request,
@@ -142,18 +143,18 @@ async def extract_knowledge_graph_from_file(
     access_token=Form(None)
 ):
     """
-    Calls 'extract_graph_from_file' in a new thread to create Neo4jGraph from a
-    PDF file based on the model.
+    PDF 파일을 기반으로 모델에 따라 Neo4jGraph를 생성하기 위해 
+    'extract_graph_from_file' 함수를 새로운 스레드에서 호출합니다.
+    
+    Args: 
+    `uri`: 추출할 그래프의 URI
+    `userName`: 그래프 생성에 사용할 사용자 이름
+    `password`: 그래프 생성에 사용할 비밀번호
+    `file`: PDF 파일을 포함하는 파일 객체
+    `model`: 사용할 모델 유형 ('Diffbot' 또는 'OpenAI GPT')
 
-    Args:
-          uri: URI of the graph to extract
-          userName: Username to use for graph creation
-          password: Password to use for graph creation
-          file: File object containing the PDF file
-          model: Type of model to use ('Diffbot'or'OpenAI GPT')
-
-    Returns:
-          Nodes and Relations created in Neo4j databse for the pdf file
+    Return:
+    PDF 파일에 대해 Neo4j 데이터베이스에서 생성된 노드 및 관계
     """
     try:
         graph = create_graph_database_connection(uri, userName, password, database)   
@@ -202,7 +203,7 @@ async def extract_knowledge_graph_from_file(
 @app.get("/sources_list")
 async def get_source_list(uri:str, userName:str, password:str, database:str=None):
     """
-    Calls 'get_source_list_from_graph' which returns list of sources which already exist in databse
+    데이터베이스에 이미 존재하는 소스 목록을 반환하는 `get_source_list_from_graph` 함수를 호출합니다.
     """
     try:
         decoded_password = decode_password(password)
@@ -221,8 +222,8 @@ async def get_source_list(uri:str, userName:str, password:str, database:str=None
 
 @app.post("/update_similarity_graph")
 async def update_similarity_graph(uri=Form(None), userName=Form(None), password=Form(None), database=Form(None)):
-    """
-    Calls 'update_graph' which post the query to update the similiar nodes in the graph
+    """    
+    그래프에서 유사한 노드를 업데이트하는 쿼리를 게시하는 `update_graph` 함수를 호출합니다.    
     """
     try:
         graph = create_graph_database_connection(uri, userName, password, database)

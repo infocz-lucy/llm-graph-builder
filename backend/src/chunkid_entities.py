@@ -22,8 +22,8 @@ CHUNK_TEXT_QUERY = "match (doc)<-[:PART_OF]-(chunk:Chunk) WHERE chunk.id IN $chu
 
 
 def process_record(record, elements_data):
-    """
-    Processes a record to extract and organize node and relationship data.
+    """    
+    레코드를 처리하여 노드 및 관계 데이터를 추출하고 구성합니다.
     """
     try:
         entities = record["entities"]
@@ -59,8 +59,8 @@ def time_to_seconds(time_str):
     return h * 3600 + m * 60 + s
 
 def process_chunk_data(chunk_data):
-    """
-    Processes a record to extract chunk_text
+    """    
+    레코드를 처리하여 chunk_text를 추출합니다.
     """
     try:
         required_doc_properties = ["fileSource", "fileType", "url"]
@@ -81,16 +81,17 @@ def process_chunk_data(chunk_data):
  
 def get_entities_from_chunkids(uri, username, password, chunk_ids):
     """
-    Retrieve and process nodes and relationships from a graph database given a list of chunk IDs.
+    그래프 데이터베이스에서 노드 및 관계 정보 가져오기
+    주어진 청크 ID 목록을 사용하여 그래프 데이터베이스에서 노드 및 관계 정보를 가져와 처리합니다.
 
     Parameters:
-    uri (str): The URI of the graph database.
-    username (str): The username for the database authentication.
-    password (str): The password for the database authentication.
-    chunk_ids (str): A comma-separated string of chunk IDs.
+    uri (str): 그래프 데이터베이스의 URI입니다.
+    username (str): 데이터베이스 인증을 위한 사용자 이름입니다.
+    password (str): 데이터베이스 인증을 위한 비밀번호입니다.
+    chunk_ids (str): 쉼표로 구분된 청크 ID 문자열입니다.
 
     Returns:
-    dict: A dictionary with 'nodes' and 'relationships' keys containing processed data, or an error message.
+    dict: 'nodes' 및 'relationships' 키를 포함하는 딕셔너리로, 처리된 데이터 또는 오류 메시지가 담겨 있습니다.
     """    
     try:
         logging.info(f"Starting graph query process for chunk ids")

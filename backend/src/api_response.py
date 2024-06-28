@@ -2,16 +2,18 @@
 
 def create_api_response(status,success_count=None,failed_count=None, data=None, error=None,message=None,file_source=None,file_name=None):
     """
-    Create a response to be sent to the API. This is a helper function to create a JSON response that can be sent to the API.
+    API에 전송할 응답을 생성하는 도우미 함수입니다. 이 함수는 API에 전송할 JSON 응답을 생성합니다.
     
     Args:
-        status: The status of the API call. Should be one of the constants in this module.
-        data: The data that was returned by the API call.
-        error: The error that was returned by the API call.
-        success_count: Number of files successfully processed.
-        failed_count: Number of files failed to process.
-    Returns: 
-      A dictionary containing the status data and error if any
+        status: API 호출의 상태. 이 모듈의 상수 중 하나여야 합니다.
+        data: API 호출에 의해 반환된 데이터.
+        error: API 호출에 의해 반환된 오류.
+        success_count: 성공적으로 처리된 파일 수.
+        failed_count: 처리에 실패한 파일 수.
+    
+    Returns:
+        상태, 데이터 및 오류(있는 경우)를 포함하는 딕셔너리      
+
     """
     response = {"status": status}
 
